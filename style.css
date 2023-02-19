@@ -1,0 +1,26 @@
+body {
+  width: 300px;
+  height: auto;
+  font-size: 0.8rem !important;
+  padding: 10px;
+  /* display: flex; */
+  justify-content: center;
+  /* rgb(212 213 236) */
+  background-color: rgb(235, 240, 188);
+}
+
+.btn {
+  font-size: 0.9rem;
+  padding: 6px;
+  border-radius: 4px;
+  border: 2px solid rgb(241, 77, 143);
+  /* display: inline-flex; */
+  margin: 8px auto;
+  font-weight: 500;
+}
+
+#displayColor {
+  /* display: flex;
+  justify-content: flex-end; */
+  font-weight: 600;
+}

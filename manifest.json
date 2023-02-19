@@ -1,0 +1,26 @@
+{
+  "name": "Color Picker",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "author": "Niharika Dutta",
+  "description": "My first chrome extension.",
+  "icons": {
+    "128": "logo.png"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "browser_style": true,
+    "default_icon": {
+      "128": "logo.png"
+    },
+    "default_title": "Pick any color."
+  },
+  "permissions": ["activeTab", "scripting", "tabs", "notifications"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["script.js"]
+    }
+  ],
+  "host_permissions": ["http://*", "https://*"]
+}
