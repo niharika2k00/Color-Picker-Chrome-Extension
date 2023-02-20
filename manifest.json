@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "manifest_version": 3,
   "author": "Niharika Dutta",
-  "description": "My first chrome extension.",
+  "description": "chrome extension.",
   "icons": {
     "128": "./logo/logo.png"
   },
@@ -13,7 +13,7 @@
     "default_icon": {
       "128": "./logo/logo.png"
     },
-    "default_title": "Pick any color."
+    "default_title": "I'm here to pick colors for you."
   },
   "permissions": ["activeTab", "scripting", "tabs", "notifications"],
   "content_scripts": [
@@ -22,5 +22,5 @@
       "js": ["script.js"]
     }
   ],
-  "host_permissions": ["http://*"]
+  "optional_host_permissions": ["https://*/*", "http://*/*"]
 }

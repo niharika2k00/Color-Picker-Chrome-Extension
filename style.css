@@ -3,17 +3,9 @@ body {
   height: auto;
   font-size: 0.8rem !important;
   padding: 10px;
-  /* display: flex; */
   justify-content: center;
   /* rgb(212 213 236) */
   background-color: rgb(55, 55, 51);
-}
-
-.heading {
-  color: #fff;
-  padding-right: 6px;
-  align-items: center;
-  justify-content: center;
 }
 
 .btn {

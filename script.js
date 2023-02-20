@@ -13,61 +13,77 @@ const colorValueRgb = document.querySelector(".colorValueRgb");
 //   .query({ currentWindow: true, active: true })
 //   .then((tabs) => console.log(tabs[0]));
 
-button.addEventListener("click", async () => {
-  try {
-    console.log("add event listener");
+if (button) {
+  button.addEventListener("click", async () => {
+    try {
+      console.log("add event listener");
 
-    let tabArr = await chrome.tabs.query({ active: true, currentWindow: true });
-    console.log(tabArr[0]);
+      let tabArr = await chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
+      console.log(tabArr[0]);
 
-    // Inject js script into website  - asynchronous function that returns a Promise.
-    // ReturnType: array of InjectionResult
-    // chrome.scripting.executeScript(
-    //   {
-    //     target: { tabId: tabArr[0].id },
-    //     func: getColor,
-    //   },
-    //   async (injectionResults) => {
-    //     console.log(injectionResults);
-    //   }
-    // );
+      // Inject js script into website  - asynchronous function that returns a Promise.
+      // ReturnType: array of InjectionResult
+      // chrome.scripting.executeScript(
+      //   {
+      //     target: { tabId: tabArr[0].id },
+      //     func: getColor,
+      //   },
+      //   async (injectionResults) => {
+      //     console.log(injectionResults);
+      //   }
+      // );
 
-    // chrome.scripting
-    //   .executeScript({
-    //     target: { tabId: tabArr[0].id },
-    //     func: getColor,
-    //   })
-    //   .then((injectionResults) => {
-    //     console.log(injectionResults);
-    //   });
+      // chrome.scripting.executeScript({
+      //     target: { tabId: tabArr[0].id },
+      //     func: getColor,
+      //   })
+      //   .then((injectionResults) => {
+      //     console.log(injectionResults);
+      //   });
 
-    let injectionResults = await chrome.scripting.executeScript({
-      target: { tabId: tabArr[0].id },
-      func: getColor,
-    });
+      let injectionResults = await chrome.scripting.executeScript({
+        target: { tabId: tabArr[0].id },
+        func: getColor,
+      });
 
-    let res = await injectionResults;
-    console.log(res);
+      let res = await injectionResults;
+      console.log(res);
 
-    if (res[0].result) {
-      let color = res[0].result.sRGBHex;
-      colorValueRgb.innerHTML =
-        color + ' <img src="./logo/wheel.png" style="height: 1.7rem" />';
-      color = color.split(",");
-      console.log(color);
-      var r = Number(color[0].split("(")[1].trim());
-      var g = Number(color[1].trim());
-      var b = Number(color[2].trim());
+      if (res[0].result) {
+        let color = res[0].result.sRGBHex;
+        colorValueRgb.innerHTML =
+          color + ' <img src="./logo/wheel.png" style="height: 1.7rem" />';
+        color = color.split(",");
+        console.log(color);
+        var r = Number(color[0].split("(")[1].trim());
+        var g = Number(color[1].trim());
+        var b = Number(color[2].trim());
 
-      var hexColor = rgbToHex(r, g, b);
-      console.log(hexColor);
-      colorGrid.style.backgroundColor = hexColor;
-      colorValue.innerHTML = hexColor;
+        var hexColor = rgbToHex(r, g, b);
+        console.log(hexColor);
+        colorGrid.style.backgroundColor = hexColor;
+        colorValue.innerHTML = hexColor;
+
+        // Copy text to clipboard
+        hexColorCopy(hexColor);
+      }
+    } catch (err) {
+      console.log(err);
     }
+  });
+}
+
+var hexColorCopy = async (text) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    console.log("Text copied : ", text);
   } catch (err) {
     console.log(err);
   }
-});
+};
 
 var getColor = async () => {
   try {
