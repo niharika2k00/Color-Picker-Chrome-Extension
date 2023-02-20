@@ -5,13 +5,13 @@
   "author": "Niharika Dutta",
   "description": "My first chrome extension.",
   "icons": {
-    "128": "logo.png"
+    "128": "./logo/logo.png"
   },
   "action": {
     "default_popup": "index.html",
     "browser_style": true,
     "default_icon": {
-      "128": "logo.png"
+      "128": "./logo/logo.png"
     },
     "default_title": "Pick any color."
   },
@@ -22,5 +22,5 @@
       "js": ["script.js"]
     }
   ],
-  "host_permissions": ["http://*", "https://*"]
+  "host_permissions": ["http://*"]
 }

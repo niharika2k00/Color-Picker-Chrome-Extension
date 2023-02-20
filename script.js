@@ -1,24 +1,13 @@
-// var imgarr = [];
-
-// const imgs = document.getElementsByTagName("img");
-// for (let i = 0; i < imgs.length; i++) {
-//   const random = Math.floor(Math.random() * imgs.length);
-//   // imgs[i].src = imgarr[0];
-// }
-
-// (function () {
-//   // alert("Chrome Extention running.");
-// })();
-
 const button = document.querySelector(".btn");
 const displayColor = document.querySelector("#displayColor");
 const colorGrid = document.querySelector(".colorGrid");
 const colorValue = document.querySelector(".colorValue");
+const colorValueRgb = document.querySelector(".colorValueRgb");
 
 // browser.tabs.query(queryObj , callback)
-chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
-  console.log(tabs[0]);
-});
+// chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
+//   console.log(tabs[0]);
+// });
 
 // chrome.tabs
 //   .query({ currentWindow: true, active: true })
@@ -60,10 +49,20 @@ button.addEventListener("click", async () => {
     let res = await injectionResults;
     console.log(res);
 
-    if (res.length) {
+    if (res[0].result) {
       let color = res[0].result.sRGBHex;
-      colorGrid.style.backgroundColor = color;
-      colorValue.innerHTML = color;
+      colorValueRgb.innerHTML =
+        color + ' <img src="./logo/wheel.png" style="height: 1.7rem" />';
+      color = color.split(",");
+      console.log(color);
+      var r = Number(color[0].split("(")[1].trim());
+      var g = Number(color[1].trim());
+      var b = Number(color[2].trim());
+
+      var hexColor = rgbToHex(r, g, b);
+      console.log(hexColor);
+      colorGrid.style.backgroundColor = hexColor;
+      colorValue.innerHTML = hexColor;
     }
   } catch (err) {
     console.log(err);
@@ -81,6 +80,20 @@ var getColor = async () => {
   } catch (e) {
     console.log(err);
   }
+};
+
+var rgbToHex = (r, g, b) => {
+  console.log(typeof r); // Number required
+
+  r = r.toString(16);
+  g = g.toString(16);
+  b = b.toString(16);
+
+  if (r.length == 1) r = "0" + r;
+  if (g.length == 1) g = "0" + g;
+  if (b.length == 1) b = "0" + b;
+
+  return "#" + r + g + b;
 };
 
 /*
