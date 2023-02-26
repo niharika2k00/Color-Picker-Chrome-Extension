@@ -4,7 +4,6 @@ const colorGrid = document.querySelector(".colorGrid");
 const colorValue = document.querySelector(".colorValue");
 const colorValueRgb = document.querySelector(".colorValueRgb");
 
-// browser.tabs.query(queryObj , callback)
 // chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
 //   console.log(tabs[0]);
 // });
